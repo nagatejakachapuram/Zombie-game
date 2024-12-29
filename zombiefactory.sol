@@ -23,14 +23,14 @@ contract ZombieFactory {
         ownerZombieCount[msg.sender]++;
         emit NewZombie(id, _name, _dna);
     }
-
+    // Generating dna
     function _generateRandomDna(
         string memory _str
     ) private view returns (uint) {
         uint rand = uint(keccak256(abi.encodePacked(_str)));
         return rand % dnaModulus;
     }
-
+    // Creating Zombies
     function createRandomZombie(string memory _name) public {
         require(ownerZombieCount[msg.sender] == 0);
         uint randDna = _generateRandomDna(_name);
